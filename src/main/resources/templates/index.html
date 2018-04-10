@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Chat na socketach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href="css/clean-blog.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css"  th:href="@{/main.css}">
+  <script type="text/javascript" th:src="@{chat.js}"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="http://splon.pl">Tweetlike</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href='http://splon.pl/addpost'>Dodaj post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='http://splon.pl/profile'>Mój profil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='http://splon.pl:8181/weather'>Pogodynka</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='http://splon.pl:8282/'>Chat online</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='http://splon.pl:8484/'>Quiz Milionerzy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='http://splon.pl/about'>O nas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='http://splon.pl/logout'>Wyloguj</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+              <h1>Nasz chat</h1>
+              <h2>Chat online w Springu na socketach z dodatkiem Javasript</h2>
+             <a href="https://github.com/bastekkrakow/Chat">
+            <img src="/img/GitHub-Mark-Light-32px.png" alt="GitHub" style="width:30px;height:30px;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article class="col-lg-8 col-md-10 mx-auto">
+  <p id="status">Not connected</p>
+  <p>Podłączonych użytkowników <span id="connected">0
+                  </span></p>
+  <ul id="log"></ul>
+
+  <br>
+  <form onsubmit="addMessage(); return false;">
+    <input type="text" id="chat" placeholder="Wpisz wiadomość by chatować"/>
+  </form>
+</article>
+
+<script>
+    connected = document.getElementById("connected");
+    log = document.getElementById("log");
+    chat = document.getElementById("chat");
+    form = chat.form;
+    state = document.getElementById("status");
+
+    if (window.WebSocket === undefined) {
+        state.innerHTML = "sockets not supported";
+        state.className = "fail";
+    } else {
+        if (typeof String.prototype.startsWith != "function") {
+            String.prototype.startsWith = function (str) {
+                return this.indexOf(str) == 0;
+            };
+        }
+
+        window.addEventListener("load", onLoad, false);
+    }
+</script>
+
+  <footer>
+    Tweetlike is a Company's Internal communication system & Instant chat
+    <br>
+    <br>
+    <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          <li class="list-inline-item">
+            <a href="https://github.com/bastekkrakow">
+              <img src="/img/github.jpg" alt="GitHub" style="width:128px;height:50px;">
+            </a>
+            &nbsp;
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/sebplonka/">
+              <img src="/img/linkedin.jpg" alt="LinkedIn" style="width:128px;height:50px;">
+            </a>
+          </li>
+                  </ul>
+        <p class="copyright text-muted">Copyright &copy; bastekkrakow 2018</p>
+      </div>
+    </div>
+  </div>
+  </footer>
+
+</body>
+
+</html>

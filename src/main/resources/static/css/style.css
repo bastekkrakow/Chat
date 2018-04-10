@@ -1,0 +1,27 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th,td {
+    padding: 5px;
+}
+
+#cityName {
+    text-align: center;  
+}
+
+#description {
+    text-align: center;
+}
+
+.cold{
+    background-color: cornflowerblue;
+}
+
+.optimalPressure {
+    background-color: lightgreen;
+}
+
+.lowPressure {
+    background-color: lightsalmon;
+}
